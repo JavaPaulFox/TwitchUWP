@@ -6,17 +6,33 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-    <SplitView x:Name="MySplitView" DisplayMode="CompactOverlay"  IsPaneOpen="False" 
+
+    <Page.Resources>
+    
+    </Page.Resources>
+
+    <SplitView x:Name="MySplitView" DisplayMode="CompactInline"  IsPaneOpen="False" 
                CompactPaneLength="50" OpenPaneLength="150">
         <SplitView.Pane>
             <StackPanel Background="Gray">
-                <Button x:Name="HamburgerButton" FontFamily="Segoe MDL2 Assets" Content="&#xE700;"
+                <Button  x:Name="HamburgerButton" FontFamily="Segoe MDL2 Assets" Content="&#xE700;"
                      Width="50" Height="50" Background="Transparent" Click="HamburgerButton_Click" />
-                <StackPanel Orientation="Horizontal">
-                    <Button x:Name="LogIn" FontFamily="Segoe MDL2 Assets" Content="&#59259;"
-                     Width="50" Height="50" Background="Transparent" Click="LogIn_Click"/>
-                    <TextBlock Text="Button 1" FontSize="18" VerticalAlignment="Center" />
+                
+                    
+                        <StackPanel Orientation="Horizontal" >
+                    <Button x:Name="LogInButton" HorizontalContentAlignment="Left" FontFamily="Segoe MDL2 Assets,Arial"  Content="  &#59259;          Log In" Width="145" Height="50"   >
+                        <Button.Foreground>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="Black" Offset="0"/>
+                                <GradientStop Color="#FF812727" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Button.Foreground>
+                        
+                    </Button>
+
                 </StackPanel>
+                    
+
 
             </StackPanel>
         </SplitView.Pane>
@@ -28,9 +44,10 @@
                 </Grid.RowDefinitions>
                 <TextBlock Text="SplitView Basic" FontSize="54" Foreground="White"
                            HorizontalAlignment="Center" VerticalAlignment="Center" Margin="759,422,758,504" Grid.Row="1"/>
+                <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="475,44,0,0" Grid.Row="1" VerticalAlignment="Top" Height="98" Width="327" Foreground="#FFBD3131" FontStretch="UltraCondensed" FontStyle="Italic" IsTextScaleFactorEnabled="False"/>
             </Grid>
         </SplitView.Content>
     </SplitView>
-
+    
 
 </Page>
