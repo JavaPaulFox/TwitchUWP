@@ -31,7 +31,6 @@ namespace TwitchUWP
             //    var postitionScope = code.IndexOf("&scope=");
             //    code = code.Remove(postitionScope);
             //    var token = await oauth2.GetToken(code);
-
             //}
         }
 
