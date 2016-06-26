@@ -21,12 +21,6 @@ namespace TwitchUWP
             oauth2 = new Oauth2Authentication();
         }
 
-        private async void button_Click(object sender, RoutedEventArgs e)
-        {
-            
-            
-        }
-
         private async void LogInWebView_ContentLoading(WebView sender, WebViewContentLoadingEventArgs args)
         {
             
