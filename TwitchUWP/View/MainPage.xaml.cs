@@ -23,7 +23,7 @@ namespace TwitchUWP
 
         private async void button_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof (LogInPage));
+            
             
         }
 
@@ -50,6 +50,11 @@ namespace TwitchUWP
         private void HamburgerButton_Click(object sender, RoutedEventArgs e)
         {
             MySplitView.IsPaneOpen = !MySplitView.IsPaneOpen;
+        }
+
+        private void LogIn_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(LogInPage));
         }
     }
 }

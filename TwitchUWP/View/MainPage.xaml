@@ -14,7 +14,7 @@
                      Width="50" Height="50" Background="Transparent" Click="HamburgerButton_Click" />
                 <StackPanel Orientation="Horizontal">
                     <Button x:Name="LogIn" FontFamily="Segoe MDL2 Assets" Content="&#59259;"
-                     Width="50" Height="50" Background="Transparent"/>
+                     Width="50" Height="50" Background="Transparent" Click="LogIn_Click"/>
                     <TextBlock Text="Button 1" FontSize="18" VerticalAlignment="Center" />
                 </StackPanel>
 
@@ -22,8 +22,12 @@
         </SplitView.Pane>
         <SplitView.Content>
             <Grid Background="White">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="41*"/>
+                    <RowDefinition Height="499*"/>
+                </Grid.RowDefinitions>
                 <TextBlock Text="SplitView Basic" FontSize="54" Foreground="White"
-                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                           HorizontalAlignment="Center" VerticalAlignment="Center" Margin="759,422,758,504" Grid.Row="1"/>
             </Grid>
         </SplitView.Content>
     </SplitView>
