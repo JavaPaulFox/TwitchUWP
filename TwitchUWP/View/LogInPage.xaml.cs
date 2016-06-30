@@ -1,17 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
+using TwitchUWP.Core.Authentication;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -22,10 +11,30 @@ namespace TwitchUWP.View
     /// </summary>
     public sealed partial class LogInPage : Page
     {
+
+        private Oauth2Authentication oauth2;
         public LogInPage()
         {
             this.InitializeComponent();
+            oauth2 = new Oauth2Authentication();
             LogInWebView.Navigate(new Uri(@"https://api.twitch.tv/kraken/oauth2/authorize?response_type=code&client_id=1e14a4aow4glqc05s80kdf15r94g0x&redirect_uri=http://localhost&scope=user_follows_edit&state=CheckThisOut"));
         }
+
+        private async void LogInWebView_ContentLoading(WebView sender, WebViewContentLoadingEventArgs args)
+        {
+
+            if (LogInWebView.Source.AbsoluteUri.Contains("code=") && LogInWebView.Source.Host == "localhost")
+            {
+                var postitionCode = LogInWebView.Source.AbsoluteUri.IndexOf("code=");
+                var code = LogInWebView.Source.AbsoluteUri.Remove(0, postitionCode + 5);
+                var postitionScope = code.IndexOf("&scope=");
+                code = code.Remove(postitionScope);
+                oauth2.GetToken(code);
+                this.Frame.Navigate(typeof (MainPage));
+                
+            }
+        }
+
+        
     }
 }

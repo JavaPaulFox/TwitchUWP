@@ -95,6 +95,8 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\HamburgerMenuViewModel.cs" />
+    <Compile Include="ViewModel\NotificationBase.cs" />
     <Compile Include="View\LogInPage.xaml.cs">
       <DependentUpon>LogInPage.xaml</DependentUpon>
     </Compile>
@@ -139,6 +141,9 @@
       <Project>{15c7d8b6-2610-471e-9ef5-326a2a1e09ab}</Project>
       <Name>TwitchUWP.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

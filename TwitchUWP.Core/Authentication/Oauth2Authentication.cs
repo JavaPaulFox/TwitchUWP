@@ -50,7 +50,7 @@ namespace TwitchUWP.Core.Authentication
             }
 
             JsonConvert.DeserializeObject<Token>(response);
-            var i  = Token.access_token;
+            
             return webResponse;
         }
 

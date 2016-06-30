@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d" Width="480">
     <RelativePanel HorizontalAlignment="Left" Height="800" VerticalAlignment="Top" Width="480" Background="White" MinWidth="480" MinHeight="800" MaxWidth="1080" MaxHeight="1920">
-        <WebView x:Name="LogInWebView" HorizontalAlignment="Left" Height="800" VerticalAlignment="Top" Width="318" Margin="0,10,0,-378" MaxWidth="1080" MaxHeight="1920" MinWidth="300" MinHeight="800"/>
+        <WebView x:Name="LogInWebView" HorizontalAlignment="Left" Height="800" VerticalAlignment="Top" Width="318" Margin="0,10,0,-378" MaxWidth="1080" MaxHeight="1920" MinWidth="300" MinHeight="800" ContentLoading="LogInWebView_ContentLoading"/>
     </RelativePanel>
 
 
