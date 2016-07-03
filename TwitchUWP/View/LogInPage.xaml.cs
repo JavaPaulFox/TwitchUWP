@@ -11,8 +11,8 @@ namespace TwitchUWP.View
     /// </summary>
     public sealed partial class LogInPage : Page
     {
-
         private Oauth2Authentication oauth2;
+
         public LogInPage()
         {
             this.InitializeComponent();
@@ -22,19 +22,22 @@ namespace TwitchUWP.View
 
         private async void LogInWebView_ContentLoading(WebView sender, WebViewContentLoadingEventArgs args)
         {
-
+            ProgressRing.IsActive = true;
             if (LogInWebView.Source.AbsoluteUri.Contains("code=") && LogInWebView.Source.Host == "localhost")
             {
                 var postitionCode = LogInWebView.Source.AbsoluteUri.IndexOf("code=");
                 var code = LogInWebView.Source.AbsoluteUri.Remove(0, postitionCode + 5);
                 var postitionScope = code.IndexOf("&scope=");
                 code = code.Remove(postitionScope);
-                oauth2.GetToken(code);
-                this.Frame.Navigate(typeof (MainPage));
-                
+                await oauth2.GetToken(code);
+                this.Frame.Navigate(typeof(MainPage));
+
             }
         }
 
-        
+        private void LogInWebView_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
+        {
+            ProgressRing.IsActive = false;
+        }
     }
 }
