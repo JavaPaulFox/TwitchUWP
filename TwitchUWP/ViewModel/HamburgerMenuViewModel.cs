@@ -1,9 +1,13 @@
 ﻿using System;
+using Windows.UI.Core;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Navigation;
 using TwitchUWP.Core.Authentication;
 
 namespace TwitchUWP.ViewModel
 {
-    public class HamburgerMenuViewModel : NotificationBase
+    public class HamburgerMenuViewModel 
     {
         private string _logInAndProfileButtonContent;
         public string LogInAndProfileButtonContent
@@ -12,16 +16,20 @@ namespace TwitchUWP.ViewModel
             {
                 if (Token.access_token != String.Empty || Token.access_token != null)
                 {
-                    _logInAndProfileButtonContent = "  &#59259;          Profile";
+                    _logInAndProfileButtonContent = "Profile";
                     return _logInAndProfileButtonContent;
                 }
                 else
                 {
-                    _logInAndProfileButtonContent = "  &#59259;          Log In";
+                    _logInAndProfileButtonContent = "Log In";
                     return _logInAndProfileButtonContent;
                 }
             }
             set { _logInAndProfileButtonContent = value; }
         }
+
+
+
+        
     }
 }

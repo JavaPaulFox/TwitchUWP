@@ -1,6 +1,9 @@
 ﻿using System;
+using Windows.UI.Core;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using TwitchUWP.Core.Authentication;
+using TwitchUWP.ViewModel;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -11,33 +14,23 @@ namespace TwitchUWP.View
     /// </summary>
     public sealed partial class LogInPage : Page
     {
-        private Oauth2Authentication oauth2;
-
+        
+        private HamburgerMenuViewModel _hamburgerMenuViewModel;
+        private LogInModelView _logInModelView;
         public LogInPage()
         {
+            
             this.InitializeComponent();
-            oauth2 = new Oauth2Authentication();
-            LogInWebView.Navigate(new Uri(@"https://api.twitch.tv/kraken/oauth2/authorize?response_type=code&client_id=1e14a4aow4glqc05s80kdf15r94g0x&redirect_uri=http://localhost&scope=user_follows_edit&state=CheckThisOut"));
+            
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
+            _logInModelView = new LogInModelView();
+            
+            _hamburgerMenuViewModel = new HamburgerMenuViewModel();
+            //LogInWebView.Source = new Uri(@"https://api.twitch.tv/kraken/oauth2/authorize?response_type=code&client_id=1e14a4aow4glqc05s80kdf15r94g0x&redirect_uri=http://localhost&scope=user_follows_edit&state=CheckThisOut");
+            LogInWebView.Source = new Uri(@"https://www.onliner.by/");
+
         }
 
-        private async void LogInWebView_ContentLoading(WebView sender, WebViewContentLoadingEventArgs args)
-        {
-            ProgressRing.IsActive = true;
-            if (LogInWebView.Source.AbsoluteUri.Contains("code=") && LogInWebView.Source.Host == "localhost")
-            {
-                var postitionCode = LogInWebView.Source.AbsoluteUri.IndexOf("code=");
-                var code = LogInWebView.Source.AbsoluteUri.Remove(0, postitionCode + 5);
-                var postitionScope = code.IndexOf("&scope=");
-                code = code.Remove(postitionScope);
-                await oauth2.GetToken(code);
-                this.Frame.Navigate(typeof(MainPage));
-
-            }
-        }
-
-        private void LogInWebView_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
-        {
-            ProgressRing.IsActive = false;
-        }
+        
     }
 }

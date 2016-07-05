@@ -1,6 +1,8 @@
-﻿using Windows.UI.Xaml;
+﻿using Windows.UI.Core;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using TwitchUWP.Core.VideoStream;
+using TwitchUWP.Models;
 using TwitchUWP.View;
 using TwitchUWP.ViewModel;
 
@@ -18,7 +20,12 @@ namespace TwitchUWP.View
         public MainPage()
         {
             this.InitializeComponent();
+            
             HamburgerMenuViewModel = new HamburgerMenuViewModel();
+            if (!TabletPCSupport.IsTabletMode())
+            {
+                SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
+            }
         }
 
         

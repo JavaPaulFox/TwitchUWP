@@ -7,7 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-    
+
     <Page.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -22,12 +22,14 @@
         <SplitView.Pane>
 
             <StackPanel Background="Black">
-                <Button  x:Name="HamburgerButton" Foreground="White" FontFamily="Segoe MDL2 Assets" Content="&#xE700;"
-                     Width="50" Height="50" Background="Transparent" Click="HamburgerButton_Click" Style="{StaticResource HamburgerMenuButtonStyle}" />
-
 
                 <StackPanel Orientation="Vertical">
-                    
+                    <Button  x:Name="HamburgerButton" Foreground="White" FontFamily="Segoe MDL2 Assets" Content="&#xE700;"
+                     Width="50" Height="50" Background="Transparent" Click="HamburgerButton_Click" Style="{StaticResource HamburgerMenuButtonStyle}" />
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical">
+
                     <RadioButton x:Name="LogInButton" Foreground="White" Content="Log In" Tag="&#xE77B;"  Style="{StaticResource HamburgerRadioButton}" Margin="0,0,-5,0" Width="150" Click="LogInButton_Click"/>
                 </StackPanel>
 
@@ -36,7 +38,7 @@
             </StackPanel>
         </SplitView.Pane>
         <SplitView.Content>
-            <Grid Background="White" BorderBrush="Gray" BorderThickness="2">
+            <Grid Background="#5B5A5B" BorderBrush="Gray" BorderThickness="2">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="15*"/>
                     <RowDefinition Height="67*"/>
@@ -45,8 +47,7 @@
                 <TextBlock Text="SplitView Basic" FontSize="54" Foreground="White"
                            HorizontalAlignment="Center" VerticalAlignment="Center" Margin="759,422,758,504" Grid.Row="2"/>
                 <ListView x:Name="listView" HorizontalAlignment="Left" Height="100" Margin="260,-276,0,0" VerticalAlignment="Top" Width="100"/>
-                <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="357,58,0,0" Grid.Row="2" VerticalAlignment="Top"/>
-                <TextBlock x:Name="textBlock2" FontWeight="Bold"  HorizontalAlignment="Left" Margin="153,138,0,0" Grid.Row="2" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
+                
             </Grid>
         </SplitView.Content>
     </SplitView>

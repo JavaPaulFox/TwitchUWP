@@ -6,9 +6,33 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Styles/HamburgerMenuStyle.xaml"></ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
+    <SplitView x:Name="MySplitView" DisplayMode="CompactInline"  IsPaneOpen="False" 
+               CompactPaneLength="50" OpenPaneLength="150">
+        <SplitView.Pane>
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <WebView x:Name="LogInWebView" ContentLoading="LogInWebView_ContentLoading" NavigationCompleted="LogInWebView_NavigationCompleted" />
-        <ProgressRing x:Name="ProgressRing"  Width="110" Height="110" />
-    </Grid>
+            <StackPanel Background="Black">
+                <StackPanel Orientation="Vertical">
+                    <Button  x:Name="HamburgerButton" Foreground="White" FontFamily="Segoe MDL2 Assets" Content="&#xE700;"
+                     Width="50" Height="50" Background="Transparent"  Style="{StaticResource HamburgerMenuButtonStyle}" />
+                </StackPanel>
+            </StackPanel>
+        </SplitView.Pane>
+        <SplitView.Content>
+            <Grid>
+
+
+                <WebView x:Name="LogInWebView"  NavigationStarting="{x:Bind _logInModelView.LogInWebView_NavigationStart}" ContentLoading="{x:Bind _logInModelView.LogInWebView_ContentLoading}" NavigationCompleted="{x:Bind _logInModelView.LogInWebView_NavigationCompleted}"  />
+                <ProgressRing HorizontalAlignment="Left" Margin="858,402,0,0"  VerticalAlignment="Center" Height="276" Width="260" IsActive="True"/>
+
+            </Grid>
+
+        </SplitView.Content>
+    </SplitView>
 </Page>

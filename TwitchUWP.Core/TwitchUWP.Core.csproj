@@ -110,6 +110,7 @@
     <Compile Include="Authentication\Oauth2Authentication.cs" />
     <Compile Include="Authentication\Token.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VideoStream\Follows.cs" />
     <Compile Include="VideoStream\GetVideoInfo.cs" />
     <Compile Include="VideoStream\VideoInfo.cs" />
     <EmbeddedResource Include="Properties\TwitchUWP.Core.rd.xml" />

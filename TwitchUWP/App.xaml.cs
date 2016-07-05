@@ -55,7 +55,7 @@ namespace TwitchUWP
                 // Place the frame in the current Window
                 Window.Current.Content = rootFrame;
             }
-
+            Windows.UI.Core.SystemNavigationManager.GetForCurrentView().BackRequested += App_BackRequested;
             if (e.PrelaunchActivated == false)
             {
                 if (rootFrame.Content == null)
@@ -63,7 +63,7 @@ namespace TwitchUWP
                     // When the navigation stack isn't restored navigate to the first page,
                     // configuring the new page by passing required information as a navigation
                     // parameter
-                    rootFrame.Navigate(typeof(BlankPage1), e.Arguments);
+                    rootFrame.Navigate(typeof(MainPage), e.Arguments);
                 }
                 // Ensure the current window is active
                 Window.Current.Activate();
@@ -93,5 +93,21 @@ namespace TwitchUWP
             //TODO: Save application state and stop any background activity
             deferral.Complete();
         }
+
+        private void App_BackRequested(object sender, Windows.UI.Core.BackRequestedEventArgs e)
+        {
+            Frame rootFrame = Window.Current.Content as Frame;
+            if (rootFrame == null)
+                return;
+
+            // Navigate back if possible, and if the event has not 
+            // already been handled .
+            if (rootFrame.CanGoBack && e.Handled == false)
+            {
+                e.Handled = true;
+                rootFrame.GoBack();
+            }
+        }
+
     }
 }
