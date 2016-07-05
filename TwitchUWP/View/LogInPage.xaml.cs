@@ -24,10 +24,9 @@ namespace TwitchUWP.View
             
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
             _logInModelView = new LogInModelView();
-            
             _hamburgerMenuViewModel = new HamburgerMenuViewModel();
-            //LogInWebView.Source = new Uri(@"https://api.twitch.tv/kraken/oauth2/authorize?response_type=code&client_id=1e14a4aow4glqc05s80kdf15r94g0x&redirect_uri=http://localhost&scope=user_follows_edit&state=CheckThisOut");
-            LogInWebView.Source = new Uri(@"https://www.onliner.by/");
+            LogInWebView.Source = new Uri(@"https://api.twitch.tv/kraken/oauth2/authorize?response_type=code&client_id=1e14a4aow4glqc05s80kdf15r94g0x&redirect_uri=http://localhost&scope=user_follows_edit&state=CheckThisOut");
+            
 
         }
 

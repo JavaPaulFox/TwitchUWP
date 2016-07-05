@@ -16,15 +16,15 @@ namespace TwitchUWP.ViewModel
     public class LogInModelView : INotifyPropertyChanged
     {
         private Oauth2Authentication _oauth2;
-        //public bool IsActiveRing { get; set; }
-        private Visibility _visibility = Visibility.Visible;
-        public Visibility Visibility
+        
+        private bool _isActiveRing = false;
+        public bool IsActiveRing
         {
-            get { return _visibility; }
+            get { return _isActiveRing; }
             set
             {
-                _visibility = value;
-                OnPropertyChanged("Visibility");
+                _isActiveRing = value;
+                OnPropertyChanged("IsActiveRing");
             }
         }
 
@@ -35,7 +35,7 @@ namespace TwitchUWP.ViewModel
             
             _oauth2 = new Oauth2Authentication();
             if (!sender.Source.AbsoluteUri.Contains("code=") || sender.Source.Host != "localhost") return;
-            
+            sender.Visibility = Visibility.Collapsed;
             var postitionCode = sender.Source.AbsoluteUri.IndexOf("code=", StringComparison.Ordinal);
             var code = sender.Source.AbsoluteUri.Remove(0, postitionCode + 5);
             var postitionScope = code.IndexOf("&scope=", StringComparison.Ordinal);
@@ -47,13 +47,12 @@ namespace TwitchUWP.ViewModel
 
         public void LogInWebView_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
         {
-            var rootFrame = Window.Current.Content as Frame;
-            Visibility = Visibility.Collapsed;
+            IsActiveRing = !IsActiveRing;
         }
 
         public void LogInWebView_NavigationStart(WebView sender, WebViewNavigationStartingEventArgs args)
         {
-            Visibility = Visibility.Visible;
+            IsActiveRing = true;
         }
 
         protected void OnPropertyChanged(string name)

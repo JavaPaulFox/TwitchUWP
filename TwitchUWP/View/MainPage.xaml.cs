@@ -1,9 +1,7 @@
 ﻿using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using TwitchUWP.Core.VideoStream;
 using TwitchUWP.Models;
-using TwitchUWP.View;
 using TwitchUWP.ViewModel;
 
 
@@ -16,26 +14,19 @@ namespace TwitchUWP.View
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        public HamburgerMenuViewModel HamburgerMenuViewModel;
+        private HamburgerMenuViewModel HamburgerMenuViewModel;
+        private MainPageViewModel mainPageViewModel;
         public MainPage()
         {
             this.InitializeComponent();
-            
+            mainPageViewModel = new MainPageViewModel();
             HamburgerMenuViewModel = new HamburgerMenuViewModel();
             if (!TabletPCSupport.IsTabletMode())
             {
                 SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
             }
+
         }
-
-        
-
-        private void button1_Click(object sender, RoutedEventArgs e)
-        {
-            GetVideoInfo getVideoInfo = new GetVideoInfo();
-            getVideoInfo.GetStream();
-        }
-
         private void HamburgerButton_Click(object sender, RoutedEventArgs e)
         {
             MySplitView.IsPaneOpen = !MySplitView.IsPaneOpen;
@@ -46,6 +37,5 @@ namespace TwitchUWP.View
             this.Frame.Navigate(typeof(LogInPage));
         }
 
-        
     }
 }

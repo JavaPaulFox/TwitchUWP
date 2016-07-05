@@ -29,7 +29,7 @@
 
 
                 <WebView x:Name="LogInWebView"  NavigationStarting="{x:Bind _logInModelView.LogInWebView_NavigationStart}" ContentLoading="{x:Bind _logInModelView.LogInWebView_ContentLoading}" NavigationCompleted="{x:Bind _logInModelView.LogInWebView_NavigationCompleted}"  />
-                <ProgressRing HorizontalAlignment="Left" Margin="858,402,0,0"  VerticalAlignment="Center" Height="276" Width="260" IsActive="True"/>
+                <ProgressRing   VerticalAlignment="Center" HorizontalContentAlignment="Center" Height="250" Width="265" IsActive="{x:Bind _logInModelView.IsActiveRing, Mode=TwoWay}"/>
 
             </Grid>
 
