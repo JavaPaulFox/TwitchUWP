@@ -7,7 +7,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-
     <Page.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -19,6 +18,28 @@
 
     <SplitView x:Name="MySplitView" DisplayMode="CompactInline"  IsPaneOpen="False" 
                CompactPaneLength="50" OpenPaneLength="150">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="VisualStateGroup">
+                <VisualState x:Name="WVGA">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="MainGrid.ItemWidth" Value="320" />
+                        
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="FullHD">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="400" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="MainGrid.ItemWidth" Value="400" />
+                        
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
         <SplitView.Pane>
 
             <StackPanel Background="Black">
@@ -35,25 +56,15 @@
 
             </StackPanel>
         </SplitView.Pane>
-        <SplitView.Content>
-            <Grid x:Name="MainContentGrid" Padding="30" Background="#5B5A5B" BorderBrush="Gray" BorderThickness="2" Loaded="{x:Bind mainPageViewModel.MainContentGrid_Loaded}" >
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"></ColumnDefinition>
-                    <ColumnDefinition Width="Auto"></ColumnDefinition>
-                    <ColumnDefinition Width="Auto"></ColumnDefinition>
-                    <ColumnDefinition Width="Auto"></ColumnDefinition>
-                    <ColumnDefinition Width="Auto"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <TextBlock Grid.Row="0" Text="Your follows:" FontSize="55"></TextBlock>
-                
-            </Grid>
-            
-        </SplitView.Content>
-    </SplitView>
 
+
+        <ScrollViewer VerticalScrollBarVisibility="Auto" VerticalScrollMode="Auto" HorizontalScrollMode="Auto" HorizontalScrollBarVisibility="Auto">
+            <VariableSizedWrapGrid x:Name="MainGrid"  MaximumRowsOrColumns="5"   Loaded="{x:Bind mainPageViewModel.Panel_Loaded}" >
+            </VariableSizedWrapGrid>
+        </ScrollViewer>
+
+
+
+    </SplitView>
 
 </Page>

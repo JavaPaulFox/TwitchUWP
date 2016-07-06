@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Imaging;
+using TwitchUWP.Core.Utils;
 using TwitchUWP.Core.VideoStream;
 using TwitchUWP.View;
 
@@ -13,29 +14,24 @@ namespace TwitchUWP.ViewModel
 {
     public class MainPageViewModel
     {
-        public async void MainContentGrid_Loaded(object sender, object args)
+        public async void Panel_Loaded(object sender, object args)
         {
+            int columnSpan = 25;
             Streams streams = new Streams();
-            Grid mainContentGrid = sender as Grid;
+            VariableSizedWrapGrid variableGrid = sender as VariableSizedWrapGrid;
+
+            if (DeviceTypeHelper.GetDeviceFormFactorType() == DeviceFormFactorType.Phone)
+                variableGrid.MaximumRowsOrColumns = 25;
+
             var streamsList = await streams.GetStreams();
-            int counterColumn = 0;
-            int counterRow = 1;
-            for (int i = 0; i < streamsList.streams.Count; i++)
+            foreach (Core.Models.Streams t in streamsList.streams)
             {
-                if (i%5 == 0)
-                {
-                    counterColumn = 0;
-                    counterRow++;
-                    mainContentGrid?.RowDefinitions.Add(new RowDefinition() {Height = GridLength.Auto});
-                }
                 Image image = new Image();
+                //image.SetValue(VariableSizedWrapGrid.ColumnSpanProperty,columnSpan);
                 BitmapImage bmi = new BitmapImage();
-                bmi.UriSource = new Uri(streamsList.streams[i].preview["medium"]);
+                bmi.UriSource = new Uri(t.preview["large"]);
                 image.Source = bmi;
-                Grid.SetColumn(image, counterColumn);
-                Grid.SetRow(image, counterRow);
-                counterColumn++;
-                mainContentGrid?.Children.Add(image);
+                variableGrid.Children.Add(image);
             }
             
         }

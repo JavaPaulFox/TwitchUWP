@@ -37,5 +37,6 @@ namespace TwitchUWP.View
             this.Frame.Navigate(typeof(LogInPage));
         }
 
+        
     }
 }
