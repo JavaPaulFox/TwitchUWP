@@ -1,20 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using TwitchUWP.Core.Authentication;
 
 namespace TwitchUWP.Core.Models
 {
     public class StreamsModel
     {
         public int _total { get; set; }
-        public List<Streams> streams { get; set; }
+        public List<Stream> streams { get; set; }
         public Dictionary<string, string> _links { get; set; }
 
     }
 
-    public class Streams
+    public class Stream
     {
         public string game { get; set; }
         public int viewers { get; set; }
@@ -59,6 +63,6 @@ namespace TwitchUWP.Core.Models
 
     }
 
-
+    
 
 }

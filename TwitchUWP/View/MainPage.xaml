@@ -6,65 +6,88 @@
     xmlns:viewModel="using:TwitchUWP.ViewModel"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="using:TwitchUWP.Models.ModelsForView"
     mc:Ignorable="d">
     <Page.Resources>
+        
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../Styles/HamburgerMenuStyle.xaml"></ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
+           
         </ResourceDictionary>
     </Page.Resources>
 
 
-    <SplitView x:Name="MySplitView" DisplayMode="CompactInline"  IsPaneOpen="False" 
-               CompactPaneLength="50" OpenPaneLength="150">
+    <Grid x:Name="MainGrid" Background="DarkSlateBlue">
         <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup x:Name="VisualStateGroup">
-                <VisualState x:Name="WVGA">
+            <VisualStateGroup x:Name="GridViewSize">
+                <VisualState x:Name="mobile5PHorizontal">
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="0" />
+                        <AdaptiveTrigger MinWindowWidth="640" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="MainGrid.ItemWidth" Value="320" />
-                        
+                        <Setter Target="GridViewW.ItemContainerStyle" Value="{StaticResource Mobile5PGridViewHorizontal}" />
                     </VisualState.Setters>
                 </VisualState>
-                <VisualState x:Name="FullHD">
+                <VisualState x:Name="mobile5PVertical">
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="400" />
+                        <AdaptiveTrigger MinWindowWidth="360" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="MainGrid.ItemWidth" Value="400" />
-                        
+                        <Setter Target="GridViewW.ItemContainerStyle" Value="{StaticResource Mobile5PGridViewVertical}" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="mobile4PVertical">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="320" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="GridViewW.ItemContainerStyle" Value="{StaticResource Mobile4PGridViewVertical}" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="mobile4PHorizontal">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="533" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="GridViewW.ItemContainerStyle" Value="{StaticResource Mobile4PGridViewHorizontal}" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
-        <SplitView.Pane>
+        <ProgressRing x:Name="ProgressRing" HorizontalAlignment="Center" VerticalAlignment="Center" Width="250" Height="250" IsActive="True"></ProgressRing>
+        <GridView  x:Name="GridViewW"  Loading="GridViewW_Loading" Loaded="GridViewW_Loaded" IsItemClickEnabled="True" ItemClick="{x:Bind mainPageViewModel.StreamSource_Clicked}" >
 
-            <StackPanel Background="Black">
+            <GridView.ItemTemplate>
+                <DataTemplate x:DataType="models:StreamViewModel">
 
-                <StackPanel Orientation="Vertical">
-                    <Button  x:Name="HamburgerButton" Foreground="White" FontFamily="Segoe MDL2 Assets" Content="&#xE700;"
-                     Width="50" Height="50" Background="Transparent" Click="HamburgerButton_Click" Style="{StaticResource HamburgerMenuButtonStyle}" />
-                </StackPanel>
+                    <Grid Background="Black" Margin="5,5,5,5" x:Name="StackPanel" >
 
-                <StackPanel Orientation="Vertical">
+                        <Image Source="{x:Bind preview}"/>
+                        <Grid VerticalAlignment="Bottom" Background="Black" Opacity="0.7" Padding="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="3*"></ColumnDefinition>
+                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Row="0" Grid.ColumnSpan="1" HorizontalAlignment="Left"  FontFamily="Tahoma" Foreground="Red" FontWeight="Bold" Text="{x:Bind channel.display_name}"/>
+                            <TextBlock Grid.Row="1" Grid.ColumnSpan="1" FontFamily="Tahoma"  Foreground="White" FontWeight="Bold" Text="{x:Bind game}"/>
+                            <TextBlock Grid.Row="2" Grid.Column="1" Margin="0,0,0,10"  HorizontalAlignment="Right"   FontFamily="Tahoma" Foreground="White" FontWeight="Bold" Text="{x:Bind viewers}" TextWrapping="Wrap"/>
+                            <TextBlock Grid.Row="2" Grid.Column="0" Margin="0,0,0,10"  FontFamily="Tahoma"  Foreground="White" FontWeight="Bold" Text="{x:Bind title}" TextWrapping="Wrap"/>
 
-                    <RadioButton x:Name="LogInButton" Foreground="White" Content="Log In" Tag="&#xE77B;"  Style="{StaticResource HamburgerRadioButton}" Margin="0,0,-5,0" Width="150" Click="LogInButton_Click"/>
-                </StackPanel>
+                        </Grid>
 
-            </StackPanel>
-        </SplitView.Pane>
+                    </Grid>
 
 
-        <ScrollViewer VerticalScrollBarVisibility="Auto" VerticalScrollMode="Auto" HorizontalScrollMode="Auto" HorizontalScrollBarVisibility="Auto">
-            <VariableSizedWrapGrid x:Name="MainGrid"  MaximumRowsOrColumns="5"   Loaded="{x:Bind mainPageViewModel.Panel_Loaded}" >
-            </VariableSizedWrapGrid>
-        </ScrollViewer>
-
-
-
-    </SplitView>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+        </GridView>
+    </Grid>
 
 </Page>

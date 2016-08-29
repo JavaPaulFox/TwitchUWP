@@ -1,6 +1,36 @@
-﻿<iframe src="http://player.twitch.tv/?channel=Dota2ruhub"
-        height="720"
-        width="1280"
-        frameborder="0"
-        scrolling="no"
-        allowfullscreen="true"></iframe>
+﻿<script src="http://player.twitch.tv/js/embed/v1.js"></script>
+<div id="player"></div>
+<script type="text/javascript">
+    var options = {
+        width: "100%",
+        height: "100%",
+        channel: "esl_csgo",
+        //video: "{VIDEO_ID}"
+    };
+    var player = new Twitch.Player("player", options);
+
+    player.setVolume(0.5);
+
+	var setChanneltoPlayer = function(channel)
+	{
+	    player.setChannel(channel);
+        alert("hello");
+	}
+
+	var setQualityToPlayer = function() {
+	    player.setQuality("low");
+	}
+
+	var getQualitiesFromPlayer = function () {
+
+	    var resultString = "";
+	    var qualities = player.getQualities();
+	    qualities.forEach(function(item, i, qualities) {
+	        resultString = resultString + item.name + ",";
+	    })
+	    return 'hello Pavel';
+	}
+
+</script>
+
+

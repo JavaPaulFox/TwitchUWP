@@ -1,7 +1,10 @@
-﻿using Windows.UI.Core;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using TwitchUWP.Models;
+using TwitchUWP.Models.ModelsForView;
 using TwitchUWP.ViewModel;
 
 
@@ -12,31 +15,32 @@ namespace TwitchUWP.View
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainPage : Page
+    public sealed partial class MainPage : Page 
     {
         private HamburgerMenuViewModel HamburgerMenuViewModel;
         private MainPageViewModel mainPageViewModel;
         public MainPage()
         {
-            this.InitializeComponent();
-            mainPageViewModel = new MainPageViewModel();
+            InitializeComponent();   
             HamburgerMenuViewModel = new HamburgerMenuViewModel();
+            mainPageViewModel = new MainPageViewModel(); 
             if (!TabletPCSupport.IsTabletMode())
             {
                 SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
             }
 
         }
-        private void HamburgerButton_Click(object sender, RoutedEventArgs e)
+
+        private async void GridViewW_Loading(FrameworkElement sender, object args)
         {
-            MySplitView.IsPaneOpen = !MySplitView.IsPaneOpen;
+            GridViewW.Visibility = Visibility.Collapsed;
+            GridViewW.ItemsSource = await StreamsGetManager.GetStreams();
         }
 
-        private void LogInButton_Click(object sender, RoutedEventArgs e)
+        private void GridViewW_Loaded(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(LogInPage));
+            ProgressRing.IsActive = false;
+            GridViewW.Visibility = Visibility.Visible;
         }
-
-        
     }
 }

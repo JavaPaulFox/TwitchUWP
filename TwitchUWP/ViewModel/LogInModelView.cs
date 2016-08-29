@@ -42,7 +42,7 @@ namespace TwitchUWP.ViewModel
             code = code.Remove(postitionScope);
             await _oauth2.GetToken(code);
             var rootFrame = Window.Current.Content as Frame;
-            rootFrame?.Navigate(typeof(MainPage));
+            rootFrame?.Navigate(typeof(MasterPage));
         }
 
         public void LogInWebView_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
